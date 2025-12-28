@@ -15,6 +15,6 @@ jobs:
 
     steps:
       - name: "Say Hello"
-        run: echo "$greeting $first_name is using $cloud with project ${{ vars.PROJECT_TD }}"
+        run: echo "$greeting $first_name is using $cloud with project ${{ vars.PROJECT_TD }} sub_project ${{ vars.SUB_PROJECT }} !!!"
         env:
           first_name: Haridas
