@@ -1,0 +1,25 @@
+name: Testing user input
+
+on:
+ workflow_dispatch
+  inputs:
+    number1:
+      description: 'First Number'
+      default: '0'
+      required: 'true'
+    number2:
+      description: 'Second Number'
+      default: '0'
+      required: 'true'  
+env: 
+  cloud: google-cloud
+
+jobs:
+  add_numbers:
+    run-on ubuntu-latest
+    steps:
+      - name: add add_numbers
+        id: sum
+        run echo "::set.output name=$((${{input.number1}} + ${{input.number2}}))"
+      - name: Display sum
+        run echo "the sum of ${{input.number1 }} and ${{ input.number2}} is ${{ steps.sum.outputs.sum }}"
