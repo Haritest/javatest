@@ -12,6 +12,7 @@ jobs:
     environment: test
     env:
       greeting: hello
+      ACTIONS_STEP_DEBUG: true
 
     steps:
       - name: "Say Hello"
@@ -23,3 +24,5 @@ jobs:
           echo "Repository Name: ${{ github.Repository }}"
           echo "Workflow Name: ${{ github.Workflow }}"
           echo "Triggered By: ${{ github.triggering_actor }}"
+      - name: "checking Secrets"
+        run: echo "secret_value: ${{Secrets.MY_TEST}}"
