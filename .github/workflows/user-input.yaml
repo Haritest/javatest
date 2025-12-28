@@ -1,25 +1,31 @@
 name: Testing user input
 
 on:
- workflow_dispatch
-  inputs:
-    number1:
-      description: 'First Number'
-      default: '0'
-      required: 'true'
-    number2:
-      description: 'Second Number'
-      default: '0'
-      required: 'true'  
+  workflow_dispatch:
+    inputs:
+      number1:
+        description: 'First Number'
+        default: '0'
+        required: true  # Boolean, no quotes needed
+      number2:
+        description: 'Second Number'
+        default: '0'
+        required: true
+
 env: 
   cloud: google-cloud
 
 jobs:
   add_numbers:
-    run-on ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
-      - name: add add_numbers
-        id: sum
-        run echo "::set.output name=$((${{input.number1}} + ${{input.number2}}))"
+      - name: Calculate sum
+        id: calc
+        # We perform the math in bash and write to the special $GITHUB_OUTPUT file
+        run: |
+          RESULT=$(( ${{ inputs.number1 }} + ${{ inputs.number2 }} ))
+          echo "sum=$RESULT" >> $GITHUB_OUTPUT
+
       - name: Display sum
-        run echo "the sum of ${{input.number1 }} and ${{ input.number2}} is ${{ steps.sum.outputs.sum }}"
+        # Access the output using the ID of the previous step
+        run: echo "the sum of ${{ inputs.number1 }} and ${{ inputs.number2 }} is ${{ steps.calc.outputs.sum }}"
