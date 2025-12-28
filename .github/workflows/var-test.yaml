@@ -25,4 +25,5 @@ jobs:
           echo "Workflow Name: ${{ github.Workflow }}"
           echo "Triggered By: ${{ github.triggering_actor }}"
       - name: "checking Secrets"
-        run: echo "secret_value: ${{Secrets.MY_TEST}}"
+        run: |
+          echo "secret_value: ${{Secrets.MY_TEST}}"
