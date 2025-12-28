@@ -18,3 +18,8 @@ jobs:
         run: echo "$greeting $first_name is using $cloud with project ${{ vars.PROJECT_TD }} sub_project ${{ vars.SUB_PROJECT }} !!!"
         env:
           first_name: Haridas
+      - name: "Checking context variables"
+        run: |
+          echo "Repository Name: ${{ github.Repository }}"
+          echo "Workflow Name: ${{ github.Workflow }}"
+          echo "Triggered By: ${{ github.triggering_actor }}"
